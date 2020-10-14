@@ -2,9 +2,9 @@ package at.uibk.dps.dsB.ex0.modules;
 
 import org.opt4j.core.problem.ProblemModule;
 
-import at.uibk.dps.dsB.ex0.creators.MyFirstCreator;
-import at.uibk.dps.dsB.ex0.decoders.MyFirstDecoder;
-import at.uibk.dps.dsB.ex0.evaluators.MyFirstEvaluator;
+import at.uibk.dps.dsB.ex0.creators.RouteCreator;
+import at.uibk.dps.dsB.ex0.decoders.RouteDecoder;
+import at.uibk.dps.dsB.ex0.evaluators.RouteEvaluator;
 
 /**
  * In general, Opt4J's modules are use to configure the binding of interfaces to
@@ -15,9 +15,9 @@ import at.uibk.dps.dsB.ex0.evaluators.MyFirstEvaluator;
  * 
  * @author Fedor Smirnov
  */
-public class MyFirstProblemModule extends ProblemModule {
+public class RouteCalculationModule extends ProblemModule {
 	@Override
 	protected void config() {
-		bindProblem(MyFirstCreator.class, MyFirstDecoder.class, MyFirstEvaluator.class);
+		bindProblem(RouteCreator.class, RouteDecoder.class, RouteEvaluator.class);
 	}
 }
