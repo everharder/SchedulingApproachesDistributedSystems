@@ -1,10 +1,10 @@
 <configuration>
-  <module class="at.uibk.dps.dsB.ex0.modules.MyFirstProblemModule"/>
+  <module class="at.uibk.dps.dsB.ex0.modules.RouteCalculationModule"/>
   <module class="org.opt4j.optimizers.ea.EvolutionaryAlgorithmModule">
-    <property name="generations">1000</property>
-    <property name="populationSize">100</property>
-    <property name="parentsPerGeneration">25</property>
-    <property name="offspringsPerGeneration">25</property>
+    <property name="generations">100000</property>
+    <property name="populationSize">10000</property>
+    <property name="parentsPerGeneration">2500</property>
+    <property name="offspringsPerGeneration">2500</property>
     <property name="crossoverRate">0.95</property>
   </module>
   <module class="org.opt4j.viewer.ViewerModule">

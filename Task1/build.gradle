@@ -8,10 +8,6 @@ buildscript {
 	}
 }
 
-// to run sonarqube in local host
-plugins {
-	id "org.sonarqube" version "2.7"
-  }
 
 apply plugin: 'java'
 apply plugin: 'application'
