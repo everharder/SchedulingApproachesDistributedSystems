@@ -1,0 +1,1 @@
+This folder is used to save specification files. (For the most part, I am just adding the file so that .git actually creates the folder structure I expect).

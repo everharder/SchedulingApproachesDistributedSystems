@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specification xsi:schemaLocation="http://opendse.sourceforge.net http://opendse.sourceforge.net/schema.xsd" xmlns="http://opendse.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <architecture>
+    <resource id="IXP"/>
+    <resource id="cpOneSmall">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">2.0</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">20.0</attribute>
+        <attribute name="TYPE" type="STRING">CLOUD</attribute>
+      </attributes>
+    </resource>
+    <resource id="router">
+      <attributes>
+        <attribute name="PERFORMANCE" type="DOUBLE">15.0</attribute>
+        <attribute name="TYPE" type="STRING">FOG</attribute>
+      </attributes>
+    </resource>
+    <resource id="cloudProviderTwo"/>
+    <resource id="cloudProviderOne"/>
+    <resource id="cpOneMedium">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">4.0</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">40.0</attribute>
+        <attribute name="TYPE" type="STRING">CLOUD</attribute>
+      </attributes>
+    </resource>
+    <resource id="cpOneLarge">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">6.0</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">60.0</attribute>
+        <attribute name="TYPE" type="STRING">CLOUD</attribute>
+      </attributes>
+    </resource>
+    <resource id="cpTwoSmall">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">1.5</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">10.0</attribute>
+        <attribute name="TYPE" type="STRING">CLOUD</attribute>
+      </attributes>
+    </resource>
+    <resource id="smartCamera">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">60.0</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">5.0</attribute>
+        <attribute name="TYPE" type="STRING">EDGE</attribute>
+      </attributes>
+    </resource>
+    <resource id="cpTwoLarge">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">7.0</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">100.0</attribute>
+        <attribute name="TYPE" type="STRING">CLOUD</attribute>
+      </attributes>
+    </resource>
+    <resource id="camera">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">20.0</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">1.0</attribute>
+        <attribute name="TYPE" type="STRING">EDGE</attribute>
+      </attributes>
+    </resource>
+    <resource id="cpTwoMedium">
+      <attributes>
+        <attribute name="COST" type="DOUBLE">2.5</attribute>
+        <attribute name="PERFORMANCE" type="DOUBLE">30.0</attribute>
+        <attribute name="TYPE" type="STRING">CLOUD</attribute>
+      </attributes>
+    </resource>
+    <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">10.0</attribute>
+        <attribute name="COST" type="DOUBLE">5.0</attribute>
+      </attributes>
+    </link>
+    <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">10.0</attribute>
+        <attribute name="COST" type="DOUBLE">5.0</attribute>
+      </attributes>
+    </link>
+    <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">100.0</attribute>
+      </attributes>
+    </link>
+    <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">100.0</attribute>
+      </attributes>
+    </link>
+    <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">100.0</attribute>
+      </attributes>
+    </link>
+    <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">15.0</attribute>
+      </attributes>
+    </link>
+    <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">100.0</attribute>
+      </attributes>
+    </link>
+    <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">15.0</attribute>
+      </attributes>
+    </link>
+    <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">15.0</attribute>
+      </attributes>
+    </link>
+    <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">100.0</attribute>
+      </attributes>
+    </link>
+    <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">100.0</attribute>
+      </attributes>
+    </link>
+    <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">5.0</attribute>
+      </attributes>
+    </link>
+    <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED">
+      <attributes>
+        <attribute name="BANDWIDTH" type="DOUBLE">5.0</attribute>
+      </attributes>
+    </link>
+  </architecture>
+  <application>
+    <task id="preprocessing">
+      <attributes>
+        <attribute name="WORKLOAD" type="DOUBLE">150.0</attribute>
+      </attributes>
+    </task>
+    <task id="vehicleDataBaseCheck">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_CARS</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">2.0</attribute>
+      </attributes>
+    </task>
+    <task id="numberPlateRecognition">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_CARS</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">20.0</attribute>
+      </attributes>
+    </task>
+    <task id="videoRecording">
+      <attributes>
+        <attribute name="WORKLOAD" type="DOUBLE">1.0</attribute>
+      </attributes>
+    </task>
+    <task id="facialRecognition">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_PEOPLE</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">25.0</attribute>
+      </attributes>
+    </task>
+    <task id="objectRecognition">
+      <attributes>
+        <attribute name="WORKLOAD" type="DOUBLE">200.0</attribute>
+      </attributes>
+    </task>
+    <task id="identityDataBaseCheck">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_PEOPLE</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">3.0</attribute>
+      </attributes>
+    </task>
+    <task id="triggerAlert">
+      <attributes>
+        <attribute name="WORKLOAD" type="DOUBLE">0.1</attribute>
+      </attributes>
+    </task>
+    <communication id="recognizedCars">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_CARS</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">0.5</attribute>
+      </attributes>
+    </communication>
+    <communication id="recognizedNumberPlates">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_CARS</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">0.2</attribute>
+      </attributes>
+    </communication>
+    <communication id="preprocessedVideo">
+      <attributes>
+        <attribute name="WORKLOAD" type="DOUBLE">3.0</attribute>
+      </attributes>
+    </communication>
+    <communication id="recognizedPeople">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_PEOPLE</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">0.75</attribute>
+      </attributes>
+    </communication>
+    <communication id="identityDecision">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_PEOPLE</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">0.1</attribute>
+      </attributes>
+    </communication>
+    <communication id="vehicleDecision">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_CARS</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">0.1</attribute>
+      </attributes>
+    </communication>
+    <communication id="rawVideo">
+      <attributes>
+        <attribute name="WORKLOAD" type="DOUBLE">10.0</attribute>
+      </attributes>
+    </communication>
+    <communication id="identity">
+      <attributes>
+        <attribute name="TYPE" type="STRING">ITERATIVE_PEOPLE</attribute>
+        <attribute name="WORKLOAD" type="DOUBLE">0.3</attribute>
+      </attributes>
+    </communication>
+    <dependency id="dependency 9" source="objectRecognition" destination="recognizedPeople" orientation="DIRECTED"/>
+    <dependency id="dependency 8" source="vehicleDataBaseCheck" destination="vehicleDecision" orientation="DIRECTED"/>
+    <dependency id="dependency 7" source="recognizedNumberPlates" destination="vehicleDataBaseCheck" orientation="DIRECTED"/>
+    <dependency id="dependency 6" source="numberPlateRecognition" destination="recognizedNumberPlates" orientation="DIRECTED"/>
+    <dependency id="dependency 14" source="identityDecision" destination="triggerAlert" orientation="DIRECTED"/>
+    <dependency id="dependency 5" source="recognizedCars" destination="numberPlateRecognition" orientation="DIRECTED"/>
+    <dependency id="dependency 15" source="vehicleDecision" destination="triggerAlert" orientation="DIRECTED"/>
+    <dependency id="dependency 12" source="identity" destination="identityDataBaseCheck" orientation="DIRECTED"/>
+    <dependency id="dependency 13" source="identityDataBaseCheck" destination="identityDecision" orientation="DIRECTED"/>
+    <dependency id="dependency 10" source="recognizedPeople" destination="facialRecognition" orientation="DIRECTED"/>
+    <dependency id="dependency 11" source="facialRecognition" destination="identity" orientation="DIRECTED"/>
+    <dependency id="dependency 4" source="objectRecognition" destination="recognizedCars" orientation="DIRECTED"/>
+    <dependency id="dependency 3" source="preprocessedVideo" destination="objectRecognition" orientation="DIRECTED"/>
+    <dependency id="dependency 2" source="preprocessing" destination="preprocessedVideo" orientation="DIRECTED"/>
+    <dependency id="dependency 1" source="rawVideo" destination="preprocessing" orientation="DIRECTED"/>
+    <dependency id="dependency 0" source="videoRecording" destination="rawVideo" orientation="DIRECTED"/>
+    <functions>
+      <function anchor="recognizedCars">
+        <attributes>
+          <attribute name="ID" type="STRING">func0</attribute>
+        </attributes>
+      </function>
+    </functions>
+  </application>
+  <mappings>
+    <mapping id="identityDataBaseCheck-on-cpTwoMedium" source="identityDataBaseCheck" target="cpTwoMedium"/>
+    <mapping id="numberPlateRecognition-on-cpOneSmall" source="numberPlateRecognition" target="cpOneSmall"/>
+    <mapping id="vehicleDataBaseCheck-on-cpTwoSmall" source="vehicleDataBaseCheck" target="cpTwoSmall"/>
+    <mapping id="videoRecording-on-smartCamera" source="videoRecording" target="smartCamera"/>
+    <mapping id="numberPlateRecognition-on-router" source="numberPlateRecognition" target="router"/>
+    <mapping id="preprocessing-on-smartCamera" source="preprocessing" target="smartCamera"/>
+    <mapping id="vehicleDataBaseCheck-on-router" source="vehicleDataBaseCheck" target="router"/>
+    <mapping id="identityDataBaseCheck-on-cpTwoSmall" source="identityDataBaseCheck" target="cpTwoSmall"/>
+    <mapping id="triggerAlert-on-cpTwoSmall" source="triggerAlert" target="cpTwoSmall"/>
+    <mapping id="numberPlateRecognition-on-cpTwoMedium" source="numberPlateRecognition" target="cpTwoMedium"/>
+    <mapping id="objectRecognition-on-router" source="objectRecognition" target="router"/>
+    <mapping id="facialRecognition-on-cpTwoMedium" source="facialRecognition" target="cpTwoMedium"/>
+    <mapping id="preprocessing-on-cpOneSmall" source="preprocessing" target="cpOneSmall"/>
+    <mapping id="facialRecognition-on-router" source="facialRecognition" target="router"/>
+    <mapping id="preprocessing-on-cpOneLarge" source="preprocessing" target="cpOneLarge"/>
+    <mapping id="facialRecognition-on-cpOneSmall" source="facialRecognition" target="cpOneSmall"/>
+    <mapping id="triggerAlert-on-cpTwoMedium" source="triggerAlert" target="cpTwoMedium"/>
+    <mapping id="numberPlateRecognition-on-cpTwoLarge" source="numberPlateRecognition" target="cpTwoLarge"/>
+    <mapping id="facialRecognition-on-cpTwoLarge" source="facialRecognition" target="cpTwoLarge"/>
+    <mapping id="vehicleDataBaseCheck-on-cpTwoLarge" source="vehicleDataBaseCheck" target="cpTwoLarge"/>
+    <mapping id="objectRecognition-on-cpOneLarge" source="objectRecognition" target="cpOneLarge"/>
+    <mapping id="facialRecognition-on-cpTwoSmall" source="facialRecognition" target="cpTwoSmall"/>
+    <mapping id="facialRecognition-on-cpOneLarge" source="facialRecognition" target="cpOneLarge"/>
+    <mapping id="triggerAlert-on-cpOneMedium" source="triggerAlert" target="cpOneMedium"/>
+    <mapping id="objectRecognition-on-cpTwoLarge" source="objectRecognition" target="cpTwoLarge"/>
+    <mapping id="vehicleDataBaseCheck-on-cpOneLarge" source="vehicleDataBaseCheck" target="cpOneLarge"/>
+    <mapping id="identityDataBaseCheck-on-cpOneSmall" source="identityDataBaseCheck" target="cpOneSmall"/>
+    <mapping id="preprocessing-on-cpTwoSmall" source="preprocessing" target="cpTwoSmall"/>
+    <mapping id="triggerAlert-on-router" source="triggerAlert" target="router"/>
+    <mapping id="objectRecognition-on-cpOneSmall" source="objectRecognition" target="cpOneSmall"/>
+    <mapping id="triggerAlert-on-cpOneSmall" source="triggerAlert" target="cpOneSmall"/>
+    <mapping id="preprocessing-on-cpOneMedium" source="preprocessing" target="cpOneMedium"/>
+    <mapping id="vehicleDataBaseCheck-on-cpOneSmall" source="vehicleDataBaseCheck" target="cpOneSmall"/>
+    <mapping id="objectRecognition-on-cpOneMedium" source="objectRecognition" target="cpOneMedium"/>
+    <mapping id="identityDataBaseCheck-on-router" source="identityDataBaseCheck" target="router"/>
+    <mapping id="numberPlateRecognition-on-cpTwoSmall" source="numberPlateRecognition" target="cpTwoSmall"/>
+    <mapping id="vehicleDataBaseCheck-on-cpOneMedium" source="vehicleDataBaseCheck" target="cpOneMedium"/>
+    <mapping id="preprocessing-on-router" source="preprocessing" target="router"/>
+    <mapping id="triggerAlert-on-cpTwoLarge" source="triggerAlert" target="cpTwoLarge"/>
+    <mapping id="identityDataBaseCheck-on-cpOneMedium" source="identityDataBaseCheck" target="cpOneMedium"/>
+    <mapping id="preprocessing-on-cpTwoMedium" source="preprocessing" target="cpTwoMedium"/>
+    <mapping id="identityDataBaseCheck-on-cpTwoLarge" source="identityDataBaseCheck" target="cpTwoLarge"/>
+    <mapping id="objectRecognition-on-cpTwoMedium" source="objectRecognition" target="cpTwoMedium"/>
+    <mapping id="videoRecording-on-camera" source="videoRecording" target="camera"/>
+    <mapping id="vehicleDataBaseCheck-on-cpTwoMedium" source="vehicleDataBaseCheck" target="cpTwoMedium"/>
+    <mapping id="triggerAlert-on-cpOneLarge" source="triggerAlert" target="cpOneLarge"/>
+    <mapping id="identityDataBaseCheck-on-cpOneLarge" source="identityDataBaseCheck" target="cpOneLarge"/>
+    <mapping id="objectRecognition-on-cpTwoSmall" source="objectRecognition" target="cpTwoSmall"/>
+    <mapping id="preprocessing-on-cpTwoLarge" source="preprocessing" target="cpTwoLarge"/>
+    <mapping id="facialRecognition-on-cpOneMedium" source="facialRecognition" target="cpOneMedium"/>
+    <mapping id="numberPlateRecognition-on-cpOneMedium" source="numberPlateRecognition" target="cpOneMedium"/>
+    <mapping id="numberPlateRecognition-on-cpOneLarge" source="numberPlateRecognition" target="cpOneLarge"/>
+  </mappings>
+  <routings>
+    <routing source="recognizedCars">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="recognizedNumberPlates">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="vehicleDecision">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="rawVideo">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="preprocessedVideo">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="identity">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="recognizedPeople">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+    <routing source="identityDecision">
+      <resource id="IXP"/>
+      <resource id="cpOneSmall"/>
+      <resource id="router"/>
+      <resource id="cloudProviderTwo"/>
+      <resource id="cloudProviderOne"/>
+      <resource id="cpOneMedium"/>
+      <resource id="cpOneLarge"/>
+      <resource id="cpTwoSmall"/>
+      <resource id="smartCamera"/>
+      <resource id="cpTwoLarge"/>
+      <resource id="camera"/>
+      <resource id="cpTwoMedium"/>
+      <link id="cable1" source="camera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cable2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal1" source="cloudProviderTwo" destination="cpTwoSmall" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal2" source="cloudProviderTwo" destination="cpTwoMedium" orientation="UNDIRECTED"/>
+      <link id="cpTwoInternal3" source="cloudProviderTwo" destination="cpTwoLarge" orientation="UNDIRECTED"/>
+      <link id="internet2" source="IXP" destination="cloudProviderOne" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal1" source="cloudProviderOne" destination="cpOneSmall" orientation="UNDIRECTED"/>
+      <link id="internet1" source="router" destination="IXP" orientation="UNDIRECTED"/>
+      <link id="internet3" source="IXP" destination="cloudProviderTwo" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal3" source="cloudProviderOne" destination="cpOneLarge" orientation="UNDIRECTED"/>
+      <link id="cpOneInternal2" source="cloudProviderOne" destination="cpOneMedium" orientation="UNDIRECTED"/>
+      <link id="wireless2" source="smartCamera" destination="router" orientation="UNDIRECTED"/>
+      <link id="wireless1" source="camera" destination="router" orientation="UNDIRECTED"/>
+    </routing>
+  </routings>
+</specification>
