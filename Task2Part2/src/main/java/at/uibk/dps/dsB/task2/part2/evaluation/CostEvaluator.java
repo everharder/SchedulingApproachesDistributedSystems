@@ -1,5 +1,6 @@
 package at.uibk.dps.dsB.task2.part2.evaluation;
 
+import net.sf.opendse.model.*;
 import org.opt4j.core.Objective;
 import org.opt4j.core.Objectives;
 
@@ -7,8 +8,10 @@ import org.opt4j.core.Objective.Sign;
 
 import at.uibk.dps.dsB.task2.part2.properties.PropertyProvider;
 import at.uibk.dps.dsB.task2.part2.properties.PropertyProviderStatic;
-import net.sf.opendse.model.Specification;
 import net.sf.opendse.optimization.ImplementationEvaluator;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The {@link CostEvaluator} is used to calculate the costs of different
@@ -20,7 +23,7 @@ import net.sf.opendse.optimization.ImplementationEvaluator;
 public class CostEvaluator implements ImplementationEvaluator {
 
 	protected final Objective costObjective = new Objective("Costs [Distopistan Dorrar]", Sign.MIN);
-	protected final PropertyProvider propertyProvider = new PropertyProviderStatic();
+	protected final EvaluationHelper evaluationHelper = new EvaluationHelper();
 
 	@Override
 	public Specification evaluate(Specification implementation, Objectives objectives) {
@@ -37,7 +40,33 @@ public class CostEvaluator implements ImplementationEvaluator {
 	 * @return the cost of the implementation
 	 */
 	protected double calculateImplementationCost(Specification implementation) {
-		throw new IllegalStateException("Cost Calculation not yet implemented.");
+		double implementationCost = 0;
+
+		Mappings<Task, Resource> mappings = implementation.getMappings();
+		Set<String> alreadyDoneResources = new HashSet<>();
+
+		for(Mapping<Task, Resource> m : mappings) {
+
+			String id = m.getTarget().getId();
+
+			// non-cloud resource are only counted once -> skip if already done
+			if(alreadyDoneResources.contains(id)) {
+				continue;
+			}
+
+			double cost = evaluationHelper.getCost(m.getTarget());
+
+			// check whether resource is a cloud attribute or not
+			if(evaluationHelper.isCloudResource(m.getTarget())) {
+				double time = evaluationHelper.getExecutionTime(m) * evaluationHelper.getNumberOfExecutions(m.getSource());
+				implementationCost += cost / time;
+			} else {
+				alreadyDoneResources.add(id);
+				implementationCost += cost;
+			}
+		}
+
+		return implementationCost;
 	}
 
 	@Override

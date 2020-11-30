@@ -23,6 +23,16 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Task2Part2" />
+        <option name="gradleJvm" value="openjdk-15" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Task2Part2" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
