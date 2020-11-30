@@ -1,13 +1,15 @@
 package at.uibk.dps.dsB.task2.part2.evaluation;
 
+import net.sf.opendse.model.*;
 import org.opt4j.core.Objective;
 import org.opt4j.core.Objective.Sign;
 import org.opt4j.core.Objectives;
 
 import at.uibk.dps.dsB.task2.part2.properties.PropertyProvider;
 import at.uibk.dps.dsB.task2.part2.properties.PropertyProviderStatic;
-import net.sf.opendse.model.Specification;
 import net.sf.opendse.optimization.ImplementationEvaluator;
+
+import java.util.Set;
 
 /**
  * Evaluator for the makespan of the Piw3000
@@ -16,7 +18,7 @@ import net.sf.opendse.optimization.ImplementationEvaluator;
  */
 public class TimingEvaluator implements ImplementationEvaluator {
 
-	protected final PropertyProvider propertyProvider = new PropertyProviderStatic();
+	protected final EvaluationHelper evaluationHelper = new EvaluationHelper();
 
 	protected static final int priority = 0;
 
@@ -24,6 +26,7 @@ public class TimingEvaluator implements ImplementationEvaluator {
 
 	protected final String endTimeAttribute = "End Time";
 	public static final String accumulatedUsageAttribute = "Accumulated Usage";
+
 
 	@Override
 	public Specification evaluate(Specification implementation, Objectives objectives) {
@@ -39,7 +42,37 @@ public class TimingEvaluator implements ImplementationEvaluator {
 	 * @return the makespan of the orchestration
 	 */
 	protected double calculateMakespan(Specification implementation) {
-		throw new IllegalArgumentException("Makespan calculation not yet implemented.");
+
+		double executionTime = 0;
+
+		Application<Task, Dependency> application = implementation.getApplication();
+
+		Mappings<Task, Resource> mappings = implementation.getMappings();
+
+		Routings<Task, Resource, Link> routings = implementation.getRoutings();
+
+
+
+		for(Task t : application.getVertices()) {
+
+			Architecture<Resource, Link> routing = routings.get(t);
+
+			// check how often the task has to be executed
+			int n = evaluationHelper.getNumberOfExecutions(t);
+
+			// get the resource mappings for the task
+			Set<Mapping<Task, Resource>> mapping = mappings.get(t);
+			for(Mapping<Task, Resource> m : mapping) {
+
+				// check how many instances of the resource are available for parallelization
+				int instances = evaluationHelper.getNumberOfAvailableInstances(m.getTarget());
+
+				// calculate total execution time for the given task and the current resource
+				executionTime += evaluationHelper.getExecutionTime(m) * ((n / instances)+1);
+			}
+		}
+
+		return  executionTime;
 	}
 
 	@Override

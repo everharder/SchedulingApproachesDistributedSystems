@@ -34,7 +34,7 @@ public final class ShopMonitoringSpecification {
 
 	public static void main(String[] args) {
 		String specFilePath = SPEC_FOLDER_PATH + FILE_NAME;
-		Specification spec = null;
+		Specification spec;
 		if (CREATE_SPEC_FROM_CODE) {
 			spec = SpecificationGenerator.generate();
 		}else {
