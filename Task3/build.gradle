@@ -1,0 +1,58 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	// for the creation of fat jars
+	dependencies {
+		classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+	}
+}
+
+// to run sonarqube in local host
+plugins {
+	id "org.sonarqube" version "2.7"
+  }
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'jacoco'
+// for compliance with higher Java versions
+jacoco {
+		toolVersion = "0.8.5"
+	}
+// to use GitHub repositories as dependencies
+apply plugin: 'com.github.johnrengelman.shadow'
+
+mainClassName = 'org.opt4j.core.start.Opt4J'
+
+group 'importance'
+version '1.0-SNAPSHOT'
+
+
+repositories {
+	maven {
+		name "jitpack"
+		url 'https://jitpack.io' }
+	
+	mavenCentral()
+}
+
+dependencies {
+	// as an example: dependency to Opt4J
+	implementation 'com.github.FedorSmirnov89:opt4j:-SNAPSHOT'
+	// dependency to opendse
+	implementation 'com.github.FedorSmirnov89:opendse:-SNAPSHOT'
+	// test dependencies	
+	testCompile group: 'junit', 		name: 'junit', 					version: '4.+'
+	testCompile group: 'org.mockito',     name: 'mockito-core',     version: '3.4.4'
+	// dependency to local files
+	// compile files('libs/lib.jar')
+}
+
+shadowJar {
+	baseName = 'shadow'
+	classifier = null
+	version = null
+ }

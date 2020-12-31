@@ -1,0 +1,41 @@
+<configuration>
+  <module class="at.uibk.dps.sds.t3.modules.HomeworkSpecModule">
+    <property name="functionNumber">5</property>
+    <property name="minFunctionLength">1</property>
+    <property name="maxFunctionLength">3</property>
+    <property name="maxNumSucc">3</property>
+    <property name="secrecyProbability">0.5</property>
+    <property name="numEdgeClusters">3</property>
+    <property name="numCloudClusters">3</property>
+    <property name="maxEdgeResPerCluster">5</property>
+    <property name="maxCloudResPerCluster">5</property>
+  </module>
+  <module class="at.uibk.dps.sds.t3.modules.HwConstraintEvaluatorModule"/>
+  <module class="at.uibk.dps.sds.t3.modules.HwCostEvaluatorModule">
+    <property name="costPerCloudMapping">1</property>
+    <property name="costPerEdgeMapping">5</property>
+  </module>
+  <module class="net.sf.opendse.encoding.module.OptimizationNewModule">
+    <property name="allocationEncoding">UTILIZATION</property>
+    <property name="removeCyclesManually">false</property>
+    <property name="routingEncoding">FLOW</property>
+    <property name="routingEncodingType">FLEXIBLE</property>
+    <property name="stagnationRestartEnabled">true</property>
+    <property name="maximalNumberStagnatingGenerations">20</property>
+    <property name="useModularEncoding">true</property>
+    <property name="usePreprocessing">true</property>
+    <property name="useVariableOrder">true</property>
+  </module>
+  <module class="org.opt4j.optimizers.ea.EvolutionaryAlgorithmModule">
+    <property name="generations">1000</property>
+    <property name="populationSize">100</property>
+    <property name="parentsPerGeneration">25</property>
+    <property name="offspringsPerGeneration">25</property>
+    <property name="crossoverRate">0.95</property>
+  </module>
+  <module class="org.opt4j.viewer.ViewerModule">
+    <property name="closeEvent">STOP</property>
+    <property name="closeOnStop">false</property>
+    <property name="title">Opt4J -SNAPSHOT Viewer</property>
+  </module>
+</configuration>

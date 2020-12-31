@@ -42,7 +42,7 @@ Makespan Calculation:
 
 Cost Calculation:
 
-- Fog and Edge resources are bought (cost = prize), while cloud resources are leased (cost = prize/time).
+- Fog and Edge resources are bought (cost = prize), while cloud resources are leased (cost = prize * time).
 
 #### Task Objectives:
 
