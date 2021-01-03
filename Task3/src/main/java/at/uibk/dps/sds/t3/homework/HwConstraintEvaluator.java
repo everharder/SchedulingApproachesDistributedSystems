@@ -1,5 +1,6 @@
 package at.uibk.dps.sds.t3.homework;
 
+import at.uibk.dps.sds.t3.homework.constraints.*;
 import org.opt4j.core.Objective;
 import org.opt4j.core.Objectives;
 import org.opt4j.core.Objective.Sign;
@@ -18,6 +19,9 @@ public class HwConstraintEvaluator implements ImplementationEvaluator {
 
 	protected final Objective numConstraintViolations = new Objective("Num Constraint Violations", Sign.MIN);
 
+	public HwConstraintEvaluator() {
+	}
+
 	@Override
 	public Specification evaluate(Specification implementation, Objectives objectives) {
 		objectives.add(numConstraintViolations, countConstraintViolations(implementation));
@@ -31,8 +35,7 @@ public class HwConstraintEvaluator implements ImplementationEvaluator {
 	 * @return the number of constraint violations
 	 */
 	protected int countConstraintViolations(Specification implementation) {
-		// TODO implement this method
-		throw new IllegalStateException("Counting constraint violations not yet implemented.");
+	 	return ConstraintService.CountConstraintViolations(implementation);
 	}
 
 	@Override

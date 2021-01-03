@@ -1,7 +1,9 @@
 package at.uibk.dps.sds.t3.homework;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import at.uibk.dps.sds.t3.homework.constraints.ConstraintService;
 import org.opt4j.satdecoding.Constraint;
 
 import net.sf.opendse.encoding.mapping.MappingConstraintGenerator;
@@ -28,6 +30,6 @@ public class HomeworkMappingEncoding implements MappingConstraintGenerator {
 
 	@Override
 	public Set<Constraint> toConstraints(Set<T> processVariables, Mappings<Task, Resource> mappings) {
-		throw new IllegalStateException("Mapping encoding not yet implemented.");
+		return ConstraintService.ToConstraints(processVariables, spec);
 	}
 }

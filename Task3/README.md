@@ -19,6 +19,8 @@ The _example_ package contains an implementation of the constraint example used 
 
 * Have a look at the way the constraint definition works
 * Run the example launch with different settings for the used constraints in the _ExampleEncoding_ module and examine how the constraints affect the optimization
+    * no constraints: no task will be mapped -> minimal costs
+    * constraints: mapping is created
  
 ### Part 2 - Defining mapping constraints
 
@@ -48,8 +50,12 @@ Following constraints must be enforced to create valid orchestrations:
 #### Task Objectives:
 
 - Implement the constraints given above as evaluators (within the class _HwConstraintEvaluator_; use the launch file _hwEvaluatorLaunch.launch_).
+    * done
 - Complete the provided code of the _HomeworkMappingEncoding.class_ to formulate the SAT constraints enforcing mappings which are valid w.r.t. the above description (launch file: _homeworkLaunch.launch_).
+    * done
 - Compare the ways the optimization runs when the constraints are implemented as part of the evaluation on the one and as SAT constraints on the other hand. How do the different solutions scale with an increasing problem size?
+    * the evaluator based solutions runs much slower than the constrained based solution. this is probably due to the fact that in the first case the optimizer first tries to find the most cost efficient solution, without knowing the constraints. the constraints will then be applied during evaluation, which reduces the qualtity of the solution.
+    * when working with SAT constraints the optimizer can discard "wrong" solutions much earlier an therefore terminate faster.
 
 
 
