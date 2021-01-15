@@ -36,6 +36,7 @@ public class NoSecretsOnCloudConstraint implements IConstraint {
         Mappings<Task, Resource> mappings = specification.getMappings();
         Set<Constraint> constraints = new HashSet<>();
 
+        // sum(M) = 0
         Constraint c = new Constraint(Constraint.Operator.EQ, 0);
         for (Mapping<Task, Resource> mapping : mappings) {
             if (PropertyService.isCloud(mapping.getTarget()) && PropertyService.isSecret(mapping.getSource())) {
