@@ -6,11 +6,7 @@ import org.opt4j.satdecoding.Constraint;
 
 import java.util.Set;
 
-public interface IConstraint {
-
-	int CountConstraintViolations(Specification implementation);
-
-	Set<Constraint> ToConstraints(Set<T> processVariables, Specification specification);
+public interface IConstraint extends IViolationCounter, IConstraintGenerator {
 
 	/**
 	 * (1) It is very cool that you are thinking about the definition of interfaces
