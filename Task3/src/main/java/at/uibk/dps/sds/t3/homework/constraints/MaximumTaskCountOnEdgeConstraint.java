@@ -17,14 +17,13 @@ Constraint: Due to their restricted capacity, at most N tasks can be executed on
  */
 public class MaximumTaskCountOnEdgeConstraint implements IConstraint {
 
-	protected final int _maximumTaskCount; // attribute instead of hard-coding the capacity NICE
+	protected final int maximumTaskCount; // attribute instead of hard-coding the capacity NICE
 
 	public MaximumTaskCountOnEdgeConstraint(int maximumTaskCount) { // making the attribute configurable SUPER NICE
 		if (maximumTaskCount <= 0) {
 			throw new IllegalArgumentException("maximumTaskCount must be greater than 0");
 		}
-		_maximumTaskCount = maximumTaskCount; // this is more of a Python thing. You normally would have the same var
-												// name and do a this.maximumTaskCount = maximumTaskCount assignment
+		this.maximumTaskCount = maximumTaskCount;
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class MaximumTaskCountOnEdgeConstraint implements IConstraint {
 
 		// count tasks per edge resource
 		for (Resource res : edgeResources) {
-			if (mappings.get(res).size() > _maximumTaskCount) {
+			if (mappings.get(res).size() > maximumTaskCount) {
 				violations++;
 			}
 		}
@@ -57,8 +56,8 @@ public class MaximumTaskCountOnEdgeConstraint implements IConstraint {
 		// add constraint for each edge resource
 		for (Resource resource : edgeResources) {
 			
-			//   sum(M) <= 2
-			Constraint c = new Constraint(Constraint.Operator.LE, 2);
+			//   sum(M) <= maximumTaskCount
+			Constraint c = new Constraint(Constraint.Operator.LE, maximumTaskCount);
 			for (Mapping<Task, Resource> mapping : mappings.get(resource)) {
 				M mVar = Variables.varM(mapping);
 				c.add(Variables.p(mVar));
