@@ -38,9 +38,19 @@ Upon requesting the documents describing the details of the LIW4000 application,
 ### Task Objectives:
 
 - Transfer the evaluators created for Task 2 into the project you are using for Task 4
+  DONE
 - Make sure that the evaluator does not break in the new situation (it should, e.g., be able to handle situations where a parameter like the number of recognized cars is 0)
+  DONE
 - Are the results of the optimization performed with this evaluator valid/useful? Why?/Why not?
-- Adjust the evaluators so that they provide a more reliable evaluation of the (a) expected costs and the (b) worst-case makespan. 
+  YES, if you include the additions from the next objective (assuming that the currency FreeRep Library is widely accepted)
+  otherwise the evaluations reassemble mere snapshots, because the number of recognized people, cars and available cloud-resource instances changes randomly. 
+- Adjust the evaluators so that they provide a more reliable evaluation of the (a) expected costs and the (b) worst-case makespan.
+  DONE
+  Although this dramatically increases the optimizers runtime, the evaluated results have much higher quality.
+  Another approach would have been to capture some numbers for recognized people / cars and available cloud-resources during the first generation and using them throughout (in order to have fairer evaluation),
+  but the chosen solution is closer to real-life application and therefore preferable (in my opinion).
+  
+ 
 
 
 
